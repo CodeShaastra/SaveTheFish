@@ -2,6 +2,13 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "Box2D/Box2D.h"
+
+
+USING_NS_CC;
+
+
+
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -14,9 +21,20 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
+    void addNewSpriteAtPosition(Vec2 p);
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+protected:
+    void _initPhysicsWorld();
+    virtual bool onTouchBegan(Touch *touch, Event *unused_event);
+    virtual void onTouchEnded(Touch *touch, Event *unused_event);
+
+    void update(float dt);
+    b2World* _world;
+
+
 };
 
 #endif // __HELLOWORLD_SCENE_H__
